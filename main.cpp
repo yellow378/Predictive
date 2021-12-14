@@ -1,4 +1,21 @@
 #include "predictive.h"
+#include "lex.h"
+
+
+Token curToken;
+char buff[1024];																	//缓冲区
+int buffSize = 0;
+int curPos = 0;																		//当前位置
+int curRow = 0;
+char textPath[100];																	//输入如文件路径
+char outPath[100] = "null";															//输出文件路径
+char keyTable[20][20] = { "if", "else", "int", "while", "do","****", "double", "void", "return" };	//关键字表
+char idTable[100][10];																//标识符表
+int idsize = 0;																		//符号表表项数
+char numTable[100][10];																//常量表
+int numsize = 0;																	//常数表表项数
+bool fileOut = false;																//是否有输出文件
+FILE* of, * f;																		//输入输出文件
 
 set<string> nonterminal, terminal;
 string start;
@@ -49,6 +66,7 @@ int main() {
 	//计算预测分析表
 	if (isll1) {
 		cout << "满足LL1文法\n" << endl;
+		analyseProgram(pros,predict,follow,"program.txt");
 	}
 	else {
 		cout << "不满足LL1文法\n" << endl;

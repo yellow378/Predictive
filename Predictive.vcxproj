@@ -139,9 +139,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="lex.h" />
     <ClInclude Include="predictive.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="lex.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="predictive.cpp" />
   </ItemGroup>

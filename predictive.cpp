@@ -1,4 +1,22 @@
 #include "predictive.h"
+#include "lex.h"
+
+extern Token curToken;
+extern char buff[1024];												//缓冲区
+extern int buffSize;
+extern int curPos;														//当前位置
+extern int curRow;
+extern char textPath[100];												//输入如文件路径
+extern char outPath[100];										//输出文件路径
+extern char keyTable[20][20];	//关键字表
+extern const int keysize;											//关键字个数
+extern char idTable[100][10];											//标识符表
+extern int idsize;													//符号表表项数
+extern char numTable[100][10];											//常量表
+extern int numsize;												//常数表表项数
+
+extern bool fileOut;											//是否有输出文件
+extern FILE* of, * f;													//输入输出文件
 
 extern set<string> nonterminal, terminal;
 extern string start;
@@ -9,6 +27,7 @@ string getStringFromText(string path) {
 	stringstream buffer;            // stringstream object
 	buffer << fin.rdbuf();          // read file content in stringstream object
 	string str(buffer.str());       // store file content in a string
+	fin.close();
 	return str;
 }
 //获取终结符和非终结符，将所有产生式保存到pros中
@@ -387,4 +406,38 @@ void printPredict(map<string, map<string, int>> predict) {
 		}
 		cout << endl;
 	}
+}
+bool analyseProgram(vector<product> pros, map<string,map<string,int>> predict,map<string, set<string>> follow, const char* path) {
+	f = fopen(path,"r");
+	curPos = 0;
+	buffSize = 0;
+	curToken = nextToken();
+	stack<string> s;
+	s.push("$");
+	s.push(start);
+
+	while (!s.empty()) {
+		string top = s.top();
+		if (top == tokenText[(int)curToken.type]) {
+			s.pop();
+			curToken = nextToken();
+		}
+		else if (terminal.find(top) != terminal.end()) {
+			error(curToken);
+			return false;
+		}
+		else if (predict[top].find(tokenText[(int)curToken.type]) != predict[top].end()) {
+			s.pop();
+			int x = predict[top][tokenText[(int)curToken.type]];
+			for (int i = pros[x].right.size() - 1; i >= 0; i--) {
+				s.push(pros[x].right[i]);
+			}
+		}
+		else {
+			error(curToken);
+			return false;
+		}
+	}
+	cout << "语法正确" << endl;
+	return true;
 }

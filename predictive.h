@@ -1,5 +1,6 @@
 #pragma once
 #include<iostream>
+#include<stdio.h>
 #include<fstream>
 #include<sstream>
 #include<cstdio>
@@ -8,6 +9,7 @@
 #include<set>
 #include<map>
 #include<algorithm>
+#include<stack>
 using namespace std;
 
 typedef struct product {
@@ -35,3 +37,4 @@ bool isLL1(vector<product> pros,map<string,set<string>> follow);
 vector<product> unionLeftFactor(vector<product> pros);
 void printPredict(map<string,map<string,int>> predict);
 map<string, map<string, int>> getPredict(vector<product> pros, map<string, set<string>> follow);
+bool analyseProgram(vector<product> pros, map<string,map<string,int>> predict,map<string,set<string>> follow,const char* path);
