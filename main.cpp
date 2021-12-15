@@ -1,7 +1,7 @@
 #include "predictive.h"
 #include "lex.h"
 
-
+#pragma region 词法分析器的变量定义
 Token curToken;
 char buff[1024];																	//缓冲区
 int buffSize = 0;
@@ -16,6 +16,7 @@ char numTable[100][10];																//常量表
 int numsize = 0;																	//常数表表项数
 bool fileOut = false;																//是否有输出文件
 FILE* of, * f;																		//输入输出文件
+#pragma endregion
 
 set<string> nonterminal, terminal;
 string start;

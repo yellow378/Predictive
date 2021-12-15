@@ -21,7 +21,6 @@ typedef struct {
 	int c;		//列
 
 }Token;
-void opt(int argc, char* argv[]);								//命令行参数解析
 bool isLetter(char a);							
 bool isDigit(char a);
 int isKey(char* buf, int start, int end);						//判断是否是关键字
@@ -31,7 +30,7 @@ void copyStr(char* target, int start, int end, char* source);	//复制
 void printToken(Token token);									//打印记号
 void printTable();												//打印标识符表和常数表
 Token nextToken();
-void error(Token token);
+void myerror(Token token);
 
 
 const int keysize = 9;

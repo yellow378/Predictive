@@ -1,36 +1,7 @@
 int a;
-int cnt[30];
-int pow[100];
-int main(void){
-    int a , b;
-    int d;
-    a = sum(1,2);
-    b = a + b * 5;
-    /*
-        循环
-    */
-    while(1){
-        int c,d;
-        a = a + 1;
-        c = a *  (b - b / a);
-        d = sum(a,b) + cnt[2];
-        c = c + sum(c,d);
-        e = c + d;
-    }
-    if(d  != 30){
-        if(a <  2) {
-            c = 89.8;
-        }
-        while(1){
-            a = 2;
-        }
-           //a = 2;
-    }else{
-        return 100;
-    }
-    //sum(0,1);
-    return 0;
-}  
-double sum(int a,int b){
-    return a+b;
+int main(int a){
+    int b;
+    b= 11;
+    b = a * b / c + 2 + (4) * num[2];
+    return b;
 }

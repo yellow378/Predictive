@@ -423,7 +423,7 @@ bool analyseProgram(vector<product> pros, map<string,map<string,int>> predict,ma
 			curToken = nextToken();
 		}
 		else if (terminal.find(top) != terminal.end()) {
-			error(curToken);
+			myerror(curToken);
 			return false;
 		}
 		else if (predict[top].find(tokenText[(int)curToken.type]) != predict[top].end()) {
@@ -434,7 +434,7 @@ bool analyseProgram(vector<product> pros, map<string,map<string,int>> predict,ma
 			}
 		}
 		else {
-			error(curToken);
+			myerror(curToken);
 			return false;
 		}
 	}

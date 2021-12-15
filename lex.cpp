@@ -18,27 +18,6 @@ extern bool fileOut;											//是否有输出文件
 extern FILE* of, * f;													//输入输出文件
 
 int over;
-void opt(int argc, char* argv[]) {
-	if (argc == 1) {
-		printf("请输入代码文件路径:");
-		scanf("%s", textPath);			//没有输入文件，终端输入
-	}
-	else if (argc == 2) {
-		strcpy(textPath, argv[1]);		//只有输入文件
-	}
-	else if (argc == 4) {
-		if (strcmp(argv[1], "-out") == 0) {
-			strcpy(outPath, argv[2]);
-			strcpy(textPath, argv[3]);
-		}
-		else if (strcmp(argv[2], "-out") == 0) {
-			strcpy(outPath, argv[3]);
-			strcpy(textPath, argv[1]);
-		}
-		of = fopen(outPath, "w");		//有输出文件，打开
-		fileOut = true;
-	}
-}
 bool isLetter(char a) {
 	if (a <= 'z' && a >= 'a' || a <= 'Z' && a >= 'A')
 		return true;
@@ -361,10 +340,10 @@ Token nextToken() {
 	j = i;
 	curPos = i;
 	return token;
-}void error(Token token) {
-	cout << "行 " << token.r << "列 " << token.c;
+}
+void myerror(Token token) {
+	cout << "错误:\t行 " << token.r << " 列 " << token.c<<endl;
 	cout << "语法错误" << endl;
-	//exit(0);
 }
 
 
